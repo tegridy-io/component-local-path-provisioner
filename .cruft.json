@@ -1,0 +1,25 @@
+{
+  "template": "https://github.com/projectsyn/commodore-component-template.git",
+  "commit": "dcae06138d227340acb8056d0d031f32d75c09b5",
+  "checkout": "main",
+  "context": {
+    "cookiecutter": {
+      "name": "Local Path Provisioner",
+      "slug": "local-path-provisioner",
+      "parameter_key": "local_path_provisioner",
+      "test_cases": "defaults",
+      "add_lib": "n",
+      "add_pp": "n",
+      "add_golden": "y",
+      "add_matrix": "y",
+      "add_go_unit": "n",
+      "copyright_holder": "VSHN AG <info@vshn.ch>",
+      "copyright_year": "2023",
+      "github_owner": "tegridy-io",
+      "github_name": "component-local-path-provisioner",
+      "github_url": "https://github.com/tegridy-io/component-local-path-provisioner",
+      "_template": "https://github.com/projectsyn/commodore-component-template.git"
+    }
+  },
+  "directory": null
+}

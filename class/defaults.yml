@@ -1,0 +1,4 @@
+parameters:
+  local_path_provisioner:
+    =_metadata: {}
+    namespace: syn-local-path-provisioner
