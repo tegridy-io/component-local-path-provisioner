@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: local-path-provisioner
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: local-path-provisioner
+    app.kubernetes.io/version: v0.0.24
+    helm.sh/chart: local-path-provisioner-0.0.24
+  name: local-path-provisioner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: local-path-provisioner
+      app.kubernetes.io/name: local-path-provisioner
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: local-path-provisioner
+        app.kubernetes.io/name: local-path-provisioner
+    spec:
+      containers:
+        - command:
+            - local-path-provisioner
+            - --debug
+            - start
+            - --config
+            - /etc/config/config.json
+            - --service-account-name
+            - local-path-provisioner
+            - --provisioner-name
+            - cluster.local/local-path-provisioner
+            - --helper-image
+            - busybox:latest
+            - --configmap-name
+            - local-path-config
+          env:
+            - name: POD_NAMESPACE
+              value: syn-local-path-provisioner
+          image: rancher/local-path-provisioner:v0.0.24
+          imagePullPolicy: IfNotPresent
+          name: local-path-provisioner
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          volumeMounts:
+            - mountPath: /etc/config/
+              name: config-volume
+      serviceAccountName: local-path-provisioner
+      volumes:
+        - configMap:
+            name: local-path-config
+          name: config-volume

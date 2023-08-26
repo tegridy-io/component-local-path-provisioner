@@ -1,4 +1,26 @@
 parameters:
   local_path_provisioner:
     =_metadata: {}
+
     namespace: syn-local-path-provisioner
+
+    charts:
+      local_path_provisioner:
+        source: https://github.com/rancher/local-path-provisioner.git
+        version: v0.0.24
+
+    helmValues:
+      storageClass:
+        name: local-path
+      nodePathMap:
+        - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
+          paths:
+            - /var/lib/local-storage
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          memory: 128Mi
+      image:
+        tag: v0.0.24
